@@ -21,6 +21,7 @@ class TimelineActivity : AppCompatActivity() {
     lateinit var rvTweets: RecyclerView
     lateinit var adapter: TweetsAdapter
     lateinit var swipeContainer: SwipeRefreshLayout
+
     val tweets = ArrayList<Tweet>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +37,12 @@ class TimelineActivity : AppCompatActivity() {
         }
 
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+        swipeContainer.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
             android.R.color.holo_green_light,
             android.R.color.holo_orange_light,
-            android.R.color.holo_red_light);
+            android.R.color.holo_red_light
+        )
 
         rvTweets = findViewById(R.id.rvTweets)
         adapter = TweetsAdapter(tweets)
@@ -56,14 +59,16 @@ class TimelineActivity : AppCompatActivity() {
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 Log.i(TAG, "onSuccess!")
 
+                val jsonArray = json.jsonArray
+
                 try {
+                    //clear out our currently fetched tweets
                     adapter.clear()
-                    val jsonArray = json.jsonArray
                     val listOfNewTweetsRetrieved = Tweet.fromJsonArray(jsonArray)
                     tweets.addAll(listOfNewTweetsRetrieved)
                     adapter.notifyDataSetChanged()
                     // Now we call setRefreshing(false) to signal refresh has finished
-                    swipeContainer.setRefreshing(false)
+                    swipeContainer.isRefreshing = false
 
                 }catch (e: JSONException){
                     Log.e(TAG, "JSON Exception $e")
