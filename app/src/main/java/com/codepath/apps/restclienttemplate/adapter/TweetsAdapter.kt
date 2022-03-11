@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate
+package com.codepath.apps.restclienttemplate.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.codepath.apps.restclienttemplate.R
 import com.codepath.apps.restclienttemplate.models.Tweet
 
 class TweetsAdapter (val tweets: ArrayList<Tweet>) : RecyclerView.Adapter<TweetsAdapter.ViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TweetsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
 
@@ -21,7 +22,7 @@ class TweetsAdapter (val tweets: ArrayList<Tweet>) : RecyclerView.Adapter<Tweets
     }
 
     //populating data into the item through holder
-    override fun onBindViewHolder(holder: TweetsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //get the data model based on the position
         val tweet: Tweet = tweets.get(position)
 

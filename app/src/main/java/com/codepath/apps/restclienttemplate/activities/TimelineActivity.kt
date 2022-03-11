@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate
+package com.codepath.apps.restclienttemplate.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,11 +6,14 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.codepath.apps.restclienttemplate.R
+import com.codepath.apps.restclienttemplate.adapter.TweetsAdapter
+import com.codepath.apps.restclienttemplate.TwitterApplication
+import com.codepath.apps.restclienttemplate.network_client.TwitterClient
 import com.codepath.apps.restclienttemplate.models.Tweet
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import okhttp3.Headers
 import org.json.JSONException
-import org.json.JSONObject
 
 class TimelineActivity : AppCompatActivity() {
 
