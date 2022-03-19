@@ -67,9 +67,20 @@ class TimelineActivity : AppCompatActivity() {
         if (item.itemId == R.id.compose){
             //navigate to compose screen
             val intent = Intent(this, ComposeActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, REQUST_CODE)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    //This method is called when we come back from ComposeActivity
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == RESULT_OK && requestCode == REQUST_CODE){
+            val tweet = data?.getParcelableExtra<Tweet>("tweet") as Tweet
+            tweets.add(0, tweet)
+            adapter.notifyItemInserted(0)
+            rvTweets.smoothScrollToPosition(0)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun populateHomeTimeline(){
@@ -112,5 +123,6 @@ class TimelineActivity : AppCompatActivity() {
     }
     companion object{
         val TAG = "TimelineActivity"
+        val REQUST_CODE = 20
     }
 }
